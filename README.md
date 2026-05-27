@@ -1,3 +1,4 @@
+
 <p align="center">
 <img src="https://img.shields.io/badge/Quiz-App-blueviolet?style=for-the-badge&logo=javascript&logoColor=white" />
 <img src="https://img.shields.io/badge/Status-Work%20In%20Progress-yellow?style=for-the-badge" />
@@ -34,10 +35,10 @@ Un **timer visivo** con icona a clessidra accompagna ogni domanda, imponendo un 
 
 ## 🛠 Tecnologie
 
-| Stack                  | Descrizione                                              |
-| ---------------------- | -------------------------------------------------------- |
-| `HTML5`                | Struttura semantica della pagina                         |
-| `CSS3`                 | Styling con font **Roboto** e background Epicode         |
+| Stack | Descrizione |
+|---|---|
+| `HTML5` | Struttura semantica della pagina |
+| `CSS3` | Styling con font **Roboto** e background Epicode |
 | `JavaScript (Vanilla)` | Logica applicativa, randomizzazione, timer, localStorage |
 
 ---
@@ -57,11 +58,11 @@ L'intera applicazione è gestita all'interno di un unico container `#app`, il cu
 
 ### Schermate disponibili
 
-| Schermata   | Descrizione                                                                            |
-| ----------- | -------------------------------------------------------------------------------------- |
-| **Welcome** | Schermata di benvenuto con call-to-action per iniziare il quiz                         |
-| **Quiz**    | Itera 10 volte in ordine randomizzato. Mostra numero domanda, titolo, risposte e timer |
-| **Results** | Schermata finale con punteggio totale e diagramma riassuntivo                          |
+| Schermata | Descrizione |
+|---|---|
+| **Welcome** | Schermata di benvenuto con call-to-action per iniziare il quiz |
+| **Quiz** | Itera 10 volte in ordine randomizzato. Mostra numero domanda, titolo, risposte e timer |
+| **Results** | Schermata finale con punteggio totale e diagramma riassuntivo |
 
 ---
 
@@ -80,18 +81,18 @@ L'intera applicazione è gestita all'interno di un unico container `#app`, il cu
 
 ## ⚙️ Funzioni Implementate
 
-| Funzione          | Descrizione                                                                                           |
-| ----------------- | ----------------------------------------------------------------------------------------------------- |
-| `render()`        | Router principale: controlla `currentScreen` e invoca la funzione di rendering corretta               |
-| `renderWelcome()` | Costruisce e inietta la schermata di benvenuto                                                        |
-| `renderQuiz()`    | Renderizza la domanda corrente: numero `<p>`, titolo `<h3>`, bottoni risposta, timer con clessidra    |
-| `renderResults()` | Genera la schermata finale con punteggio e diagramma                                                  |
-| `startTimer()`    | Avvia il countdown tramite `setInterval`                                                              |
-| `stopTimer()`     | Interrompe il countdown tramite `clearInterval`                                                       |
-| `handleAnswer()`  | Colora i bottoni (verde/rosso), aggiorna il punteggio, attende `FEEDBACK_DELAY` ms prima di procedere |
-| `handleTimeUp()`  | Gestisce la scadenza del tempo: registra errore, evidenzia risposta corretta, avanza                  |
-| `advance()`       | Passa alla domanda successiva o, se completate tutte le 10, reindirizza ai risultati                  |
-| `saveResults()`   | Salva il punteggio finale dell'utente nel `localStorage`                                              |
+| Funzione | Descrizione |
+|---|---|
+| `render()` | Router principale: controlla `currentScreen` e invoca la funzione di rendering corretta |
+| `renderWelcome()` | Costruisce e inietta la schermata di benvenuto |
+| `renderQuiz()` | Renderizza la domanda corrente: numero `<p>`, titolo `<h3>`, bottoni risposta, timer con clessidra |
+| `renderResults()` | Genera la schermata finale con punteggio e diagramma |
+| `startTimer()` | Avvia il countdown tramite `setInterval` |
+| `stopTimer()` | Interrompe il countdown tramite `clearInterval` |
+| `handleAnswer()` | Colora i bottoni (verde/rosso), aggiorna il punteggio, attende `FEEDBACK_DELAY` ms prima di procedere |
+| `handleTimeUp()` | Gestisce la scadenza del tempo: registra errore, evidenzia risposta corretta, avanza |
+| `advance()` | Passa alla domanda successiva o, se completate tutte le 10, reindirizza ai risultati |
+| `saveResults()` | Salva il punteggio finale dell'utente nel `localStorage` |
 
 ---
 
@@ -153,12 +154,12 @@ renderQuiz() → startTimer()
 
 - Aspetta i nomi delle classi dalla coppia prima di iniziare
 
-| Area          | Classi principali                                       |
-| ------------- | ------------------------------------------------------- |
-| CSS Welcome   | Stili schermata iniziale                                |
-| CSS Quiz      | Domanda, bottoni, timer, counter, `.correct` / `.wrong` |
-| CSS Results   | Percentuale, diagramma, verdetto                        |
-| CSS Clessidra | Icona e animazione del timer                            |
+| Area | Classi principali |
+|---|---|
+| CSS Welcome | Stili schermata iniziale |
+| CSS Quiz | Domanda, bottoni, timer, counter, `.correct` / `.wrong` |
+| CSS Results | Percentuale, diagramma, verdetto |
+| CSS Clessidra | Icona e animazione del timer |
 
 ---
 
