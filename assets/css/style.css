@@ -40,7 +40,8 @@ body {
 }
 
 .brand-logo {
-  height: 36px;
+  height: 76px;
+  margin-bottom: 0;
 }
 
 #app {
