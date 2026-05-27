@@ -67,7 +67,7 @@
     "correct_answer": "Java",
     "incorrect_answers": ["Python", "C", "Jakarta"]
   },
-  {
+   {
     "id": "q11",
     "question": "Quale azienda ha sviluppato il linguaggio di programmazione Python?",
     "correct_answer": "Nessuna, è stato creato da Guido van Rossum",
