@@ -41,7 +41,6 @@ body {
 
 .brand-logo {
   height: 76px;
-  margin-bottom: 0;
 }
 
 #app {
@@ -51,6 +50,7 @@ body {
   max-width: 720px;
   width: 100%;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  margin-top: -5px;
 }
 
 /* PAGINA INIZIALE */
@@ -91,13 +91,13 @@ body {
 
 .welcome-list li::before {
   content: "★ ";
-  color: #1b2845;
+  color: #FEF301;
 }
 
 /*BOTTONI*/
 
 .btn {
-  background: #1b2845;
+  background: #f0a400;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -115,26 +115,26 @@ body {
 }
 
 .btn:hover {
-  background: #2c3e6b;
+  background: #AB7602;
 }
 
 .btn--primary {
-  background: #1b2845;
+  background: #f0a400;
   color: #fff;
 }
 
 .btn--secondary {
   background: #f4f6fa;
-  color: #1b2845;
-  border: 2px solid #1b2845;
+  color: #f0a400;
+  border: 2px solid #f0a400;
 }
 
 .btn--secondary:hover {
-  background: #e8ecf7;
+  background: #f3efd7;
 }
 
 .btn--primary:hover {
-  background: #2c3e6b;
+  background: #ca941e;
 }
 
 /*QUIZ*/
