@@ -92,6 +92,7 @@ body {
   content: "★ ";
   color: #1b2845;
 }
+
 /*BOTTONI*/
 
 .btn {
@@ -377,6 +378,7 @@ body {
   font-size: 1.4rem;
   font-weight: bold;
 }
+
 /* LISTA RIEPILOGO DOMANDE */
 
 .results-list {
@@ -555,6 +557,7 @@ body {
   margin-top: 20px;
   margin-bottom: 15px;
 }
+
 .feedback-star {
   letter-spacing: 10px;
 }
@@ -582,12 +585,104 @@ body {
   transform: scale(1.15);
 }
 
-.feedback-star--locked {
-  filter: grayscale(0%); 
-}
-
 .feedback-star--active,
 .feedback-star--locked {
   filter: grayscale(0%);
   opacity: 1;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+/* Tablet (≤ 768px) */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+
+  #app {
+    padding: 28px 24px;
+  }
+
+  .welcome-title {
+    font-size: 1.6rem;
+  }
+
+  .quiz-question {
+    font-size: 1.1rem;
+  }
+
+  .results-subtitle,
+  .feedback-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .brand {
+    margin-bottom: 16px;
+  }
+
+  #app {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .welcome-title {
+    font-size: 1.4rem;
+  }
+
+  .welcome-description {
+    font-size: 1rem;
+  }
+
+  .welcome-list li {
+    font-size: 1rem;
+  }
+
+  .quiz-question {
+    font-size: 1rem;
+  }
+
+  .quiz-answer {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  .quiz-answer__letter {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+
+  .verdictP,
+  .verdictB {
+    font-size: 1.1rem;
+    padding: 8px 20px;
+  }
+
+  .chart-container,
+  .chart-circle {
+    width: 130px;
+    height: 130px;
+  }
+
+  .chart-label {
+    width: 82px;
+    height: 82px;
+    font-size: 1.1rem;
+  }
+
+  .feedback-star {
+    font-size: 2.2rem;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
 }

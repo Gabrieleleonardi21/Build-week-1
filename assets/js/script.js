@@ -1,85 +1,19 @@
-const QUESTIONS = [
-  {
-    id: "q01",
-    question: "Cosa significa l'acronimo CPU?",
-    correct_answer: "Central Processing Unit",
-    incorrect_answers: [
-      "Central Process Unit",
-      "Computer Personal Unit",
-      "Central Processor Unit",
-    ],
-  },
-  {
-    id: "q02",
-    question: "In Java, quale keyword si usa per impedire che una variabile venga modificata?",
-    correct_answer: "final",
-    incorrect_answers: ["static", "private", "public"],
-  },
-  {
-    id: "q03",
-    question: "Il logo di Snapchat è una campana.",
-    correct_answer: "Falso",
-    incorrect_answers: ["Vero"],
-  },
-  {
-    id: "q04",
-    question: "I puntatori sono stati introdotti in C++ e non c'erano nel linguaggio C originale.",
-    correct_answer: "Falso",
-    incorrect_answers: ["Vero"],
-  },
-  {
-    id: "q05",
-    question: "Qual è il formato immagine più usato per i loghi nel database di Wikimedia?",
-    correct_answer: ".svg",
-    incorrect_answers: [".png", ".jpeg", ".gif"],
-  },
-  {
-    id: "q06",
-    question: "Cosa significa l'acronimo CSS?",
-    correct_answer: "Cascading Style Sheets",
-    incorrect_answers: [
-      "Counter Strike: Source",
-      "Corrective Style Sheets",
-      "Computer Style Sheets",
-    ],
-  },
-  {
-    id: "q07",
-    question: "Qual è il nome in codice del sistema operativo Android 7.0?",
-    correct_answer: "Nougat",
-    incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
-  },
-  {
-    id: "q08",
-    question: "Qual era il limite originale di caratteri di un Tweet?",
-    correct_answer: "140",
-    incorrect_answers: ["120", "160", "100"],
-  },
-  {
-    id: "q09",
-    question: "Linux è stato creato come alternativa a Windows XP.",
-    correct_answer: "Falso",
-    incorrect_answers: ["Vero"],
-  },
-  {
-    id: "q10",
-    question: "Quale linguaggio di programmazione condivide il nome con un'isola dell'Indonesia?",
-    correct_answer: "Java",
-    incorrect_answers: ["Python", "C", "Jakarta"],
-  },
-];
+// le domande del quiz
+const response = await fetch("questions.json");
+const QUESTIONS = await response.json();
 
 // quante domande ci sono, quanto tempo hai e timing gifs post risultato
 const TOTAL_QUESTIONS = QUESTIONS.length;
 const PASS_THRESHOLD = 60;
 const TIMER_DURATION = 20;
-const FEEDBACK_DELAY = 2500;
+const FEEDBACK_DELAY = 2000;
 const NOTIFICATION_FADE_IN = 2000;
 const NOTIFICATION_VISIBLE = 1500;
 const NOTIFICATION_FADE_OUT = 1200;
 
 // qui teniamo traccia di dove siamo nel quiz
-let currentScreen = "welcome"; // "welcome" | "quiz" | "results" | "feedback"
+let currentScreen = "welcome";
+// "welcome" | "quiz" | "results"
 let currentQuestion = 0;
 let score = 0;
 let shuffledAnswers = [];
@@ -88,8 +22,10 @@ let timerId = null;
 
 // ─── LOCAL STORAGE ────────────────────────────────────────────────────────────
 
+// chiave per salvare la cronologia nel browser
 const HISTORY_KEY = "quizHistory";
 
+// legge, aggiunge e cancella la cronologia dal browser
 const getHistory = () => JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
 const pushHistory = (item) => {
   const h = getHistory();
@@ -100,6 +36,7 @@ const clearHistory = () => localStorage.removeItem(HISTORY_KEY);
 
 // ─── UTILITY ──────────────────────────────────────────────────────────────────
 
+// crea una funzione make helper che costruisce un elemento HTML con classe e testo, così non dobbiamo scrivere sempre document.createElement e setAttribute ogni volta
 const make = (tag, className, text) => {
   const el = document.createElement(tag);
   if (className) el.className = className;
@@ -107,6 +44,7 @@ const make = (tag, className, text) => {
   return el;
 };
 
+// mescola un array
 const shuffle = (arr) => {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -115,13 +53,13 @@ const shuffle = (arr) => {
   }
   return a;
 };
-
-// ─── RENDERIZZAZIONE ──────────────────────────────────────────────────────────
+// ─── RENDERIZZAZIONE ───────────────────────────────────────────────────────────────────
 
 render();
 
-// ─── FUNZIONI DI RENDERING ────────────────────────────────────────────────────
+// ─── FUNZIONI DI RENDERING ───────────────────────────────────────────────────────────────────
 
+// decide quale schermata mostrare e la disegna
 function render() {
   const app = document.querySelector("#app");
   app.replaceChildren();
@@ -141,24 +79,30 @@ function render() {
     });
   } else if (currentScreen === "results") {
     app.appendChild(renderResults());
-    const passed = Math.round((score / TOTAL_QUESTIONS) * 100) >= PASS_THRESHOLD;
+    const passed =
+      Math.round((score / TOTAL_QUESTIONS) * 100) >= PASS_THRESHOLD;
     showResultNotification(passed);
-    document.querySelector("#btn-restart").addEventListener("click", handleRestart);
+    document
+      .querySelector("#btn-restart")
+      .addEventListener("click", handleRestart);
     document.querySelector("#btn-feedback").addEventListener("click", () => {
       currentScreen = "feedback";
       render();
     });
   } else if (currentScreen === "feedback") {
     app.appendChild(renderFeedback());
-    document.querySelector("#btn-restart").addEventListener("click", handleRestart);
+    document
+      .querySelector("#btn-restart")
+      .addEventListener("click", handleRestart);
   }
 }
 
 // ─── RENDER WELCOME ───────────────────────────────────────────────────────────
 
+// la schermata iniziale con il titolo e le istruzioni
 function renderWelcome() {
   const screen = make("div", "screen-welcome");
-  const title  = make("h2", "welcome-title", "Quiz Tech");
+  const title = make("h2", "welcome-title", "Quiz Tech");
 
   const info = make("div", "welcome-info");
   const desc = make(
@@ -185,6 +129,7 @@ function renderWelcome() {
 
 // ─── RENDER QUIZ ──────────────────────────────────────────────────────────────
 
+// costruisce la schermata con la domanda e le risposte
 function renderQuiz() {
   const q = shuffledQuestions[currentQuestion];
   shuffledAnswers = shuffle([q.correct_answer, ...q.incorrect_answers]);
@@ -194,20 +139,26 @@ function renderQuiz() {
   const screen = make("div", "screen-quiz");
   screen.dataset.questionId = q.id;
 
-  const header       = make("div", "quiz-header");
-  const counter      = make("span", "quiz-counter", `Domanda ${currentQuestion + 1} / ${TOTAL_QUESTIONS}`);
+  const header = make("div", "quiz-header");
+  const counter = make(
+    "span",
+    "quiz-counter",
+    `Domanda ${currentQuestion + 1} / ${TOTAL_QUESTIONS}`,
+  );
+  // timer con icona e conto alla rovescia
   const timerWrapper = make("div", "quiz-timer-wrapper");
-  const timerIcon    = make("span", "quiz-timer-icon", "⌛");
-  const timer        = make("span", "quiz-timer", String(TIMER_DURATION));
+  const timerIcon = make("span", "quiz-timer-icon", "⌛");
+  const timer = make("span", "quiz-timer", String(TIMER_DURATION));
   timer.id = "quiz-timer";
   timerWrapper.append(timerIcon, timer);
   header.append(counter, timerWrapper);
 
   const question = make("h2", "quiz-question", q.question);
 
+  // crea i bottoni per ogni risposta con la lettera davanti
   const answersContainer = make("div", "quiz-answers");
   shuffledAnswers.forEach((answer, i) => {
-    const btn    = make("button", "quiz-answer");
+    const btn = make("button", "quiz-answer");
     const letter = make("span", "quiz-answer__letter", letters[i]);
     btn.dataset.index = i;
     btn.append(letter, answer);
@@ -220,24 +171,28 @@ function renderQuiz() {
 
 // ─── RENDER RESULTS ───────────────────────────────────────────────────────────
 
+// mostra il riepilogo finale con il punteggio e le risposte sbagliate
 function renderResults() {
   const percentage = Math.round((score / TOTAL_QUESTIONS) * 100);
-  const passed     = percentage >= PASS_THRESHOLD;
+  const passed = percentage >= PASS_THRESHOLD;
 
-  const screen   = make("div", "screen-results");
+  const screen = make("div", "screen-results");
   const subtitle = make("h3", "results-subtitle", "Risultati");
-  const message  = make(
+  const message = make(
     "p",
     "results-message",
-    passed ? "Ottimo lavoro! Hai superato il quiz." : "Continua ad allenarti, ci sei quasi!",
+    passed
+      ? "Ottimo lavoro! Hai superato il quiz."
+      : "Continua ad allenarti, ci sei quasi!",
   );
 
   const outcome = passed
     ? make("span", "verdictP", "Promosso!")
     : make("span", "verdictB", "Bocciato");
 
+  // Grafico a torta
   const chartContainer = make("div", "chart-container");
-  const chartCircle    = make("div", "chart-circle");
+  const chartCircle = make("div", "chart-circle");
   chartCircle.style.setProperty("--pct", `${percentage}%`);
   const chartLabel = make("div", "chart-label", `${percentage}%`);
   chartContainer.append(chartCircle, chartLabel);
@@ -248,6 +203,7 @@ function renderResults() {
     `${score} / ${TOTAL_QUESTIONS} risposte corrette`,
   );
 
+  // lista di tutte le domande con esito, presa dal localStorage
   const list = make("ul", "results-list");
   getHistory().forEach((item, i) => {
     const itemEl = make(
@@ -256,11 +212,16 @@ function renderResults() {
     );
 
     const header = make("div", "results-item__header");
-    const icon   = make("span", "results-item__icon", item.isCorrect ? "✓" : "✗");
-    const qText  = make("span", "results-item__question", `${i + 1}. ${item.question}`);
+    const icon = make("span", "results-item__icon", item.isCorrect ? "✓" : "✗");
+    const qText = make(
+      "span",
+      "results-item__question",
+      `${i + 1}. ${item.question}`,
+    );
     header.append(icon, qText);
     itemEl.appendChild(header);
 
+    // se ha sbagliato, mostra la risposta giusta
     if (!item.isCorrect) {
       const hint = make("p", "results-item__hint");
       hint.append(
@@ -279,19 +240,29 @@ function renderResults() {
   const btnFeedback = make("button", "btn btn--primary", "Lascia un voto");
   btnFeedback.id = "btn-feedback";
 
-  screen.append(subtitle, message, outcome, chartContainer, scoreLabel, list, btnRestart, btnFeedback);
+  screen.append(
+    subtitle,
+    message,
+    outcome,
+    chartContainer,
+    scoreLabel,
+    list,
+    btnRestart,
+    btnFeedback,
+  );
   return screen;
 }
 
 // ─── RENDER FEEDBACK ──────────────────────────────────────────────────────────
 
+// schermata per lasciare un voto con le stelline (o le banane)
 function renderFeedback() {
-  const screen   = make("div", "screen-feedback");
-  const title    = make("h3", "feedback-title", "Che ne pensi del quiz?");
+  const screen = make("div", "screen-feedback");
+  const title = make("h3", "feedback-title", "Che ne pensi del quiz?");
   const subtitle = make("p", "feedback-subtitle", "Valutaci!!!");
 
   const starsContainer = make("div", "feedback-stars");
-  ["1", "2", "3", "4", "5"].forEach(val => {
+  ["1", "2", "3", "4", "5"].forEach((val) => {
     const star = make("span", "feedback-star", "🍌");
     star.dataset.value = val;
     starsContainer.appendChild(star);
@@ -303,12 +274,12 @@ function renderFeedback() {
   screen.append(title, subtitle, starsContainer, btn);
 
   let selected = 0;
-  let locked   = false;
+  let locked = false;
 
   const starEls = starsContainer.querySelectorAll(".feedback-star");
 
   function updateStars(hoverValue) {
-    starEls.forEach(star => {
+    starEls.forEach((star) => {
       const val = parseInt(star.dataset.value);
       star.classList.remove("feedback-star--active", "feedback-star--locked");
 
@@ -324,7 +295,7 @@ function renderFeedback() {
     });
   }
 
-  starEls.forEach(star => {
+  starEls.forEach((star) => {
     star.addEventListener("mouseenter", () => {
       updateStars(parseInt(star.dataset.value));
     });
@@ -343,7 +314,7 @@ function renderFeedback() {
         return;
       }
       selected = val;
-      locked   = true;
+      locked = true;
       updateStars(null);
       localStorage.setItem("quizRating", selected);
     });
@@ -354,15 +325,17 @@ function renderFeedback() {
   return screen;
 }
 
-// ─── TOAST NOTIFICA ───────────────────────────────────────────────────────────
-
+// mostra il toast con la gif di promosso o bocciato, poi sparisce in dissolvenza
 function showResultNotification(passed) {
   const overlay = make("div", "toast-overlay");
-  const toast   = make("div", "toast");
-  const media   = make("div", "toast__media");
+
+  const toast = make("div", "toast");
+  const media = make("div", "toast__media");
 
   const image = document.createElement("img");
-  image.className = passed ? "toast__image toast__image--passed" : "toast__image";
+  image.className = passed
+    ? "toast__image toast__image--passed"
+    : "toast__image";
   image.src = passed
     ? "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExejA5dm5pc3YxMHp2dGR3aWEzaHBzc3Q2amsxeG10c2docmhkMDUwdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/55SfA4BxofRBe/giphy.gif"
     : "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDEwMWIyYWxqeGJ6M3Vnczg0eDdqYXMyN3ozM2ZhZmJqdG84aDh6NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3tLenJm0ieE00WTHmC/giphy.gif";
@@ -380,17 +353,19 @@ function showResultNotification(passed) {
         : "Non hai raggiunto la soglia: riprova e impara dagli errori.",
     ),
   );
-
+  // mettiamo tutto insieme e lo aggiungiamo al DOM
   toast.append(media, content);
   overlay.appendChild(toast);
   document.body.appendChild(overlay);
 
   requestAnimationFrame(() => overlay.classList.add("toast-overlay--visible"));
-
+  // aggiungiamo un overlay con la gif e il messaggio
   setTimeout(
     () => overlay.classList.add("toast-overlay--hide"),
     NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE,
   );
+
+  // dopo l'animazione lo togliamo in dissolvenza proprio dal DOM
   setTimeout(
     () => overlay.remove(),
     NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT,
@@ -399,6 +374,7 @@ function showResultNotification(passed) {
 
 // ─── LOGICA ───────────────────────────────────────────────────────────────────
 
+// parte il quiz da zero
 function handleStart() {
   currentQuestion = 0;
   score = 0;
@@ -407,6 +383,7 @@ function handleStart() {
   render();
 }
 
+// torna alla schermata iniziale e resetta la pagina, utile per fare un nuovo tentativo
 function handleRestart() {
   currentQuestion = 0;
   score = 0;
@@ -415,16 +392,17 @@ function handleRestart() {
   render();
 }
 
+// gestisce quando l'utente clicca su una risposta
 function handleAnswer(button, answer) {
   const buttons = document.querySelectorAll(".quiz-answer");
   buttons.forEach((btn) => (btn.disabled = true));
 
-  const currentQ  = shuffledQuestions[currentQuestion];
+  const currentQ = shuffledQuestions[currentQuestion];
   const isCorrect = answer === currentQ.correct_answer;
-
+  // salva la risposta data dall'utente nella cronologia, così possiamo mostrarla nei risultati alla fine
   pushHistory({
-    question:      currentQ.question,
-    userAnswer:    answer,
+    question: currentQ.question,
+    userAnswer: answer,
     correctAnswer: currentQ.correct_answer,
     isCorrect,
   });
@@ -434,46 +412,55 @@ function handleAnswer(button, answer) {
     button.classList.add("quiz-answerTrue");
   } else {
     button.classList.add("quiz-answerFalse");
+    // evidenzia comunque la risposta giusta
     buttons.forEach((btn) => {
-      if (shuffledAnswers[Number(btn.dataset.index)] === currentQ.correct_answer) {
+      if (
+        shuffledAnswers[Number(btn.dataset.index)] === currentQ.correct_answer
+      ) {
         btn.classList.add("quiz-answerTrue");
       }
     });
   }
-
+  // ferma il timer e passa alla domanda successiva dopo un breve intervallo per mostrare il feedback
   stopTimer();
   setTimeout(() => advance(), FEEDBACK_DELAY);
 }
 
+// il tempo è scaduto, segna la domanda come sbagliata e vai avanti
 function handleTimeUp() {
   stopTimer();
-  const buttons  = document.querySelectorAll(".quiz-answer");
+  const buttons = document.querySelectorAll(".quiz-answer");
   const currentQ = shuffledQuestions[currentQuestion];
 
   pushHistory({
-    question:      currentQ.question,
-    userAnswer:    null,
+    question: currentQ.question,
+    userAnswer: null,
     correctAnswer: currentQ.correct_answer,
-    isCorrect:     false,
+    isCorrect: false,
   });
-
+  // disabilita i bottoni e mostra la risposta corretta
   buttons.forEach((btn) => {
     btn.disabled = true;
-    if (shuffledAnswers[Number(btn.dataset.index)] === currentQ.correct_answer) {
+    if (
+      shuffledAnswers[Number(btn.dataset.index)] === currentQ.correct_answer
+    ) {
       btn.classList.add("quiz-answerTrue");
     }
   });
   setTimeout(() => advance(), FEEDBACK_DELAY);
 }
 
+// passa alla domanda successiva, o ai risultati se abbiamo finito
 function advance() {
   currentQuestion++;
   currentScreen = currentQuestion >= TOTAL_QUESTIONS ? "results" : "quiz";
   render();
 }
 
+// fa partire il conto alla rovescia
 function startTimer() {
   let timeLeft = TIMER_DURATION;
+
   timerId = setInterval(() => {
     timeLeft--;
     const timerEl = document.querySelector("#quiz-timer");
@@ -485,6 +472,7 @@ function startTimer() {
   }, 1000);
 }
 
+// ferma il timer
 function stopTimer() {
   clearInterval(timerId);
   timerId = null;
