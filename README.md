@@ -1,5 +1,4 @@
-# Build-week-1
-# Build-week-1
+
 <p align="center">
 <img src="https://img.shields.io/badge/Quiz-App-blueviolet?style=for-the-badge&logo=javascript&logoColor=white" />
 <img src="https://img.shields.io/badge/Status-Work%20In%20Progress-yellow?style=for-the-badge" />
