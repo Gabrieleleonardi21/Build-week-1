@@ -98,7 +98,7 @@ body {
 /*BOTTONI*/
 
 .btn {
-  background: #c49000;
+  background: #F0B001;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -116,11 +116,11 @@ body {
 }
 
 .btn:hover {
-  background: #9a7000;
+  background: #c2920e;
 }
 
 .btn--primary {
-  background: #c49000;
+  background: #F0B001;
   color: #fff;
 }
 
@@ -135,7 +135,7 @@ body {
 }
 
 .btn--primary:hover {
-  background: #9a7000;
+  background: #c2920e;
 }
 
 /*QUIZ*/
