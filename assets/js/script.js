@@ -477,3 +477,4 @@ function stopTimer() {
   clearInterval(timerId);
   timerId = null;
 }
+//repo di Manuel
