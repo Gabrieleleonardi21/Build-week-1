@@ -359,6 +359,8 @@ body {
 .quiz-timer-icon {
   display: inline-block;
   animation: ruota 1.5s ease-in-out infinite;
+  filter: sepia(1) saturate(4) hue-rotate(-30deg) brightness(0.95);
+
 }
 
 /*PROMOSSO*/
