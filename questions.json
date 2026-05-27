@@ -1,0 +1,135 @@
+[
+  {
+    "id": "q01",
+    "question": "Cosa significa l'acronimo CPU?",
+    "correct_answer": "Central Processing Unit",
+    "incorrect_answers": [
+      "Central Process Unit",
+      "Computer Personal Unit",
+      "Central Processor Unit"
+    ]
+  },
+  {
+    "id": "q02",
+    "question": "In Java, quale keyword si usa per impedire che una variabile venga modificata?",
+    "correct_answer": "final",
+    "incorrect_answers": ["static", "private", "public"]
+  },
+  {
+    "id": "q03",
+    "question": "Il logo di Snapchat è una campana.",
+    "correct_answer": "Falso",
+    "incorrect_answers": ["Vero"]
+  },
+  {
+    "id": "q04",
+    "question": "I puntatori sono stati introdotti in C++ e non c'erano nel linguaggio C originale.",
+    "correct_answer": "Falso",
+    "incorrect_answers": ["Vero"]
+  },
+  {
+    "id": "q05",
+    "question": "Qual è il formato immagine più usato per i loghi nel database di Wikimedia?",
+    "correct_answer": ".svg",
+    "incorrect_answers": [".png", ".jpeg", ".gif"]
+  },
+  {
+    "id": "q06",
+    "question": "Cosa significa l'acronimo CSS?",
+    "correct_answer": "Cascading Style Sheets",
+    "incorrect_answers": [
+      "Counter Strike: Source",
+      "Corrective Style Sheets",
+      "Computer Style Sheets"
+    ]
+  },
+  {
+    "id": "q07",
+    "question": "Qual è il nome in codice del sistema operativo Android 7.0?",
+    "correct_answer": "Nougat",
+    "incorrect_answers": ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"]
+  },
+  {
+    "id": "q08",
+    "question": "Qual era il limite originale di caratteri di un Tweet?",
+    "correct_answer": "140",
+    "incorrect_answers": ["120", "160", "100"]
+  },
+  {
+    "id": "q09",
+    "question": "Linux è stato creato come alternativa a Windows XP.",
+    "correct_answer": "Falso",
+    "incorrect_answers": ["Vero"]
+  },
+  {
+    "id": "q10",
+    "question": "Quale linguaggio di programmazione condivide il nome con un'isola dell'Indonesia?",
+    "correct_answer": "Java",
+    "incorrect_answers": ["Python", "C", "Jakarta"]
+  },
+  {
+    "id": "q11",
+    "question": "Quale azienda ha sviluppato il linguaggio di programmazione Python?",
+    "correct_answer": "Nessuna, è stato creato da Guido van Rossum",
+    "incorrect_answers": ["Microsoft", "Google", "Apple"]
+  },
+  {
+    "id": "q12",
+    "question": "Cosa significa l'acronimo HTML?",
+    "correct_answer": "HyperText Markup Language",
+    "incorrect_answers": [
+      "HyperText Modern Language",
+      "High Text Markup Language",
+      "HyperTransfer Markup Language"
+    ]
+  },
+  {
+    "id": "q13",
+    "question": "In quale anno è stato fondato Google?",
+    "correct_answer": "1998",
+    "incorrect_answers": ["1994", "2000", "1996"]
+  },
+  {
+    "id": "q14",
+    "question": "Quale simbolo si usa per i commenti su una singola riga in JavaScript?",
+    "correct_answer": "//",
+    "incorrect_answers": ["#", "/*", "--"]
+  },
+  {
+    "id": "q15",
+    "question": "Git è stato creato da Linus Torvalds.",
+    "correct_answer": "Vero",
+    "incorrect_answers": ["Falso"]
+  },
+  {
+    "id": "q16",
+    "question": "Cosa restituisce typeof null in JavaScript?",
+    "correct_answer": "object",
+    "incorrect_answers": ["null", "undefined", "string"]
+  },
+  {
+    "id": "q17",
+    "question": "Quale protocollo viene usato per la navigazione sicura sul web?",
+    "correct_answer": "HTTPS",
+    "incorrect_answers": ["FTP", "SMTP", "HTTP"]
+  },
+  {
+    "id": "q18",
+    "question": "Quanti bit compongono un byte?",
+    "correct_answer": "8",
+    "incorrect_answers": ["4", "16", "32"]
+  },
+  {
+    "id": "q19",
+    "question": "In CSS, quale proprietà si usa per arrotondare gli angoli di un elemento?",
+    "correct_answer": "border-radius",
+    "incorrect_answers": ["corner-radius", "border-round", "round-corners"]
+  },
+  {
+    "id": "q20",
+    "question": "Il linguaggio SQL viene usato principalmente per gestire database relazionali.",
+    "correct_answer": "Vero",
+    "incorrect_answers": ["Falso"]
+  }
+
+]
