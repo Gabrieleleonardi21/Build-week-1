@@ -66,5 +66,69 @@
     "question": "Quale linguaggio di programmazione condivide il nome con un'isola dell'Indonesia?",
     "correct_answer": "Java",
     "incorrect_answers": ["Python", "C", "Jakarta"]
+  },
+  {
+    "id": "q11",
+    "question": "Quale azienda ha sviluppato il linguaggio di programmazione Python?",
+    "correct_answer": "Nessuna, è stato creato da Guido van Rossum",
+    "incorrect_answers": ["Microsoft", "Google", "Apple"]
+  },
+  {
+    "id": "q12",
+    "question": "Cosa significa l'acronimo HTML?",
+    "correct_answer": "HyperText Markup Language",
+    "incorrect_answers": [
+      "HyperText Modern Language",
+      "High Text Markup Language",
+      "HyperTransfer Markup Language"
+    ]
+  },
+  {
+    "id": "q13",
+    "question": "In quale anno è stato fondato Google?",
+    "correct_answer": "1998",
+    "incorrect_answers": ["1994", "2000", "1996"]
+  },
+  {
+    "id": "q14",
+    "question": "Quale simbolo si usa per i commenti su una singola riga in JavaScript?",
+    "correct_answer": "//",
+    "incorrect_answers": ["#", "/*", "--"]
+  },
+  {
+    "id": "q15",
+    "question": "Git è stato creato da Linus Torvalds.",
+    "correct_answer": "Vero",
+    "incorrect_answers": ["Falso"]
+  },
+  {
+    "id": "q16",
+    "question": "Cosa restituisce typeof null in JavaScript?",
+    "correct_answer": "object",
+    "incorrect_answers": ["null", "undefined", "string"]
+  },
+  {
+    "id": "q17",
+    "question": "Quale protocollo viene usato per la navigazione sicura sul web?",
+    "correct_answer": "HTTPS",
+    "incorrect_answers": ["FTP", "SMTP", "HTTP"]
+  },
+  {
+    "id": "q18",
+    "question": "Quanti bit compongono un byte?",
+    "correct_answer": "8",
+    "incorrect_answers": ["4", "16", "32"]
+  },
+  {
+    "id": "q19",
+    "question": "In CSS, quale proprietà si usa per arrotondare gli angoli di un elemento?",
+    "correct_answer": "border-radius",
+    "incorrect_answers": ["corner-radius", "border-round", "round-corners"]
+  },
+  {
+    "id": "q20",
+    "question": "Il linguaggio SQL viene usato principalmente per gestire database relazionali.",
+    "correct_answer": "Vero",
+    "incorrect_answers": ["Falso"]
   }
 ]
