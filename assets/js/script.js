@@ -176,15 +176,20 @@ function renderQuiz() {
 function renderResults() {
   const percentage = Math.round((score / TOTAL_QUESTIONS) * 100);
   const passed = percentage >= PASS_THRESHOLD;
-if (passed) setTimeout(() => confetti({
-  particleCount: 200,
-  angle: 90,
-  spread: 180,
-  origin: { x: 0.5, y: 0 },
-  scalar: 2,
-  ticks: 400
-}), 1000);
-const screen = make("div", "screen-results");
+  if (passed)
+    setTimeout(
+      () =>
+        confetti({
+          particleCount: 200,
+          angle: 90,
+          spread: 180,
+          origin: { x: 0.5, y: 0 },
+          scalar: 2,
+          ticks: 400,
+        }),
+      1000,
+    );
+  const screen = make("div", "screen-results");
   const subtitle = make("h3", "results-subtitle", "Risultati");
   const message = make(
     "p",
