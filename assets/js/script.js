@@ -272,7 +272,7 @@ function renderResults() {
 function renderFeedback() {
   const screen = make("div", "screen-feedback");
   const title = make("h3", "feedback-title", "Che ne pensi del quiz?");
-  const subtitle = make("p", "feedback-subtitle", "Valutaci!!!");
+  const subtitle = make("p", "feedback-subtitle", "");
 
   const RATING_GIFS = [
     null,
