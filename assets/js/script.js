@@ -272,7 +272,10 @@ function renderFeedback() {
   const screen = make("div", "screen-feedback");
   const title = make("h3", "feedback-title", "Che ne pensi del quiz?");
   const subtitle = make("p", "feedback-subtitle", "Valutaci!!!");
-
+  const gif = document.createElement("img");
+  gif.src = "https://media.giphy.com/media/tqKUvQOOle9MG0gRHd/giphy.gif";
+  gif.alt = "Leave a review";
+  gif.className = "feedback-gif";
   const starsContainer = make("div", "feedback-stars");
   ["1", "2", "3", "4", "5"].forEach((val) => {
     const star = make("span", "feedback-star", "🍌");
