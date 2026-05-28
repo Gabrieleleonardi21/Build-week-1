@@ -91,9 +91,13 @@ function render() {
     });
   } else if (currentScreen === "feedback") {
     app.appendChild(renderFeedback());
-    document
-      .querySelector("#btn-restart")
-      .addEventListener("click", handleRestart);
+    document.querySelector("#btn-restart").addEventListener("click", () => {
+      if (localStorage.getItem("quizRating")) {
+        showFeedbackThankYou(handleRestart);
+      } else {
+        handleRestart();
+      }
+    });
   }
 }
 
@@ -398,6 +402,45 @@ function showResultNotification(passed) {
   // dopo l'animazione lo togliamo in dissolvenza proprio dal DOM
   setTimeout(
     () => overlay.remove(),
+    NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT,
+  );
+}
+
+// mostra il toast di ringraziamento dopo che l'utente invia il voto, poi sparisce in dissolvenza
+function showFeedbackThankYou(callback) {
+  const overlay = make("div", "toast-overlay");
+  const toast = make("div", "toast");
+  const media = make("div", "toast__media");
+
+  const image = document.createElement("img");
+  image.className = "toast__image";
+  image.src = "https://media.giphy.com/media/AquCieaLRDZTxH8UUZ/giphy.gif";
+  image.alt = "Grazie per il feedback!";
+  media.appendChild(image);
+
+  const content = make("div", "toast__content");
+  content.append(
+    make("strong", "toast__title", "Grazie!"),
+    make("p", "toast__text", "Il tuo voto è stato registrato."),
+  );
+
+  // mettiamo tutto insieme e lo aggiungiamo al DOM
+  toast.append(media, content);
+  overlay.appendChild(toast);
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => overlay.classList.add("toast-overlay--visible"));
+  // avviamo la dissolvenza in uscita dopo il tempo di visibilità
+  setTimeout(
+    () => overlay.classList.add("toast-overlay--hide"),
+    NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE,
+  );
+  // dopo l'animazione lo togliamo dal DOM e richiamiamo il callback
+  setTimeout(
+    () => {
+      overlay.remove();
+      if (callback) callback();
+    },
     NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT,
   );
 }
