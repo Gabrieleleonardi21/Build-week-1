@@ -555,6 +555,14 @@ body {
   }
 }
 
+.feedback-gif {
+  display: block;
+  margin: 0 auto;
+  max-width: 320px;
+  width: 100%;
+  border-radius: 12px;
+}
+
 .feedback-stars {
   width: 100%;
   text-align: center;
