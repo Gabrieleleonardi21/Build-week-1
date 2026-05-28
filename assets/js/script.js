@@ -274,6 +274,22 @@ function renderFeedback() {
   const title = make("h3", "feedback-title", "Che ne pensi del quiz?");
   const subtitle = make("p", "feedback-subtitle", "Valutaci!!!");
 
+  const RATING_GIFS = [
+    null,
+    "https://media.giphy.com/media/VlfPeu5N36sm2CWBMq/giphy.gif",
+    "https://media.giphy.com/media/H37dlCM5A2UKq6VEQW/giphy.gif",
+    "https://media.giphy.com/media/ge72kOBcmApplbyoXi/giphy.gif",
+    "https://media.giphy.com/media/9O5WJAiknhYxe8npHT/giphy.gif",
+    "https://media.giphy.com/media/HMUtJ4Wtgpcqt8nERg/giphy.gif",
+  ];
+  const DEFAULT_GIF =
+    "https://media.giphy.com/media/tqKUvQOOle9MG0gRHd/giphy.gif";
+
+  const gif = document.createElement("img");
+  gif.src = DEFAULT_GIF;
+  gif.alt = "Leave a review";
+  gif.className = "feedback-gif";
+
   const starsContainer = make("div", "feedback-stars");
   ["1", "2", "3", "4", "5"].forEach((val) => {
     const star = make("span", "feedback-star", "🍌");
@@ -281,10 +297,10 @@ function renderFeedback() {
     starsContainer.appendChild(star);
   });
 
-  const btn = make("button", "btn btn--primary", "Ricomincia");
+  const btn = make("button", "btn btn--primary", "Invia voto");
   btn.id = "btn-restart";
 
-  screen.append(title, subtitle, starsContainer, btn);
+  screen.append(title, subtitle, gif, starsContainer, btn);
 
   let selected = 0;
   let locked = false;
@@ -323,12 +339,14 @@ function renderFeedback() {
         locked = false;
         selected = 0;
         updateStars(null);
+        gif.src = DEFAULT_GIF;
         localStorage.removeItem("quizRating");
         return;
       }
       selected = val;
       locked = true;
       updateStars(null);
+      gif.src = RATING_GIFS[val];
       localStorage.setItem("quizRating", selected);
     });
   });
