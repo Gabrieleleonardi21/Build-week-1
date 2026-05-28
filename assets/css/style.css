@@ -36,8 +36,7 @@ body {
 }
 
 /* ─── HEADER / BRAND ──────────────────────────────────────────────────────────
-   Contenitore del logo in alto a sinistra, allineato alla stessa larghezza
-   della card principale.
+   Contenitore del logo in alto a sinistra 
 */
 .brand {
   width: 100%;
@@ -69,7 +68,7 @@ body {
    SCHERMATA INIZIALE
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* Colonna allineata a sinistra con spazio tra gli elementi */
+
 .screen-welcome {
   display: flex;
   flex-direction: column;
