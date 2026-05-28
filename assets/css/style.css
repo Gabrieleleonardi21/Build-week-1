@@ -98,7 +98,7 @@ body {
 /*BOTTONI*/
 
 .btn {
-  background: #c49000;
+  background: #F0B001;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -116,11 +116,19 @@ body {
 }
 
 .btn:hover {
+<<<<<<< HEAD
   background: #eeaf01bb;
 }
 
 .btn--primary {
   background: #EEAF01;
+=======
+  background: #c2920e;
+}
+
+.btn--primary {
+  background: #F0B001;
+>>>>>>> 3e10d771437f19daad73665856c1d067d96fcf1c
   color: #fff;
 }
 
@@ -135,7 +143,11 @@ body {
 }
 
 .btn--primary:hover {
+<<<<<<< HEAD
   background: #eeaf01bb;
+=======
+  background: #c2920e;
+>>>>>>> 3e10d771437f19daad73665856c1d067d96fcf1c
 }
 
 /*QUIZ*/
