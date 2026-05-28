@@ -360,7 +360,6 @@ body {
   display: inline-block;
   animation: ruota 1.5s ease-in-out infinite;
   filter: sepia(1) saturate(4) hue-rotate(-30deg) brightness(0.95);
-
 }
 
 /*PROMOSSO*/
@@ -554,6 +553,14 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.feedback-gif {
+  display: block;
+  margin: 0 auto;
+  max-width: 320px;
+  width: 100%;
+  border-radius: 12px;
 }
 
 .feedback-stars {
