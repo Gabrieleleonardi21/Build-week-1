@@ -7,7 +7,7 @@ const QUESTIONS = await response.json();
 const TOTAL_QUESTIONS = QUESTIONS.length;
 const PASS_THRESHOLD = 60;
 const TIMER_DURATION = 20;
-const FEEDBACK_DELAY = 2000;
+const FEEDBACK_DELAY = 2000; //timer per le risposte da una a l'altra
 const NOTIFICATION_FADE_IN = 2000;
 const NOTIFICATION_VISIBLE = 1500;
 const NOTIFICATION_FADE_OUT = 1200;
@@ -92,9 +92,13 @@ function render() {
     });
   } else if (currentScreen === "feedback") {
     app.appendChild(renderFeedback());
-    document
-      .querySelector("#btn-restart")
-      .addEventListener("click", handleRestart);
+    document.querySelector("#btn-restart").addEventListener("click", () => {
+      if (localStorage.getItem("quizRating")) {
+        showFeedbackThankYou(handleRestart);
+      } else {
+        handleRestart();
+      }
+    });
   }
 }
 
@@ -176,15 +180,20 @@ function renderQuiz() {
 function renderResults() {
   const percentage = Math.round((score / TOTAL_QUESTIONS) * 100);
   const passed = percentage >= PASS_THRESHOLD;
-if (passed) setTimeout(() => confetti({
-  particleCount: 200,
-  angle: 90,
-  spread: 180,
-  origin: { x: 0.5, y: 0 },
-  scalar: 2,
-  ticks: 400
-}), 1000);
-const screen = make("div", "screen-results");
+  if (passed)
+    setTimeout(
+      () =>
+        confetti({
+          particleCount: 200,
+          angle: 90,
+          spread: 180,
+          origin: { x: 0.5, y: 0 },
+          scalar: 2,
+          ticks: 400,
+        }),
+      1000,
+    );
+  const screen = make("div", "screen-results");
   const subtitle = make("h3", "results-subtitle", "Risultati");
   const message = make(
     "p",
@@ -267,7 +276,23 @@ const screen = make("div", "screen-results");
 function renderFeedback() {
   const screen = make("div", "screen-feedback");
   const title = make("h3", "feedback-title", "Che ne pensi del quiz?");
-  const subtitle = make("p", "feedback-subtitle", "Valutaci!!!");
+  const subtitle = make("p", "feedback-subtitle", "");
+
+  const RATING_GIFS = [
+    null,
+    "https://media.giphy.com/media/VlfPeu5N36sm2CWBMq/giphy.gif",
+    "https://media.giphy.com/media/H37dlCM5A2UKq6VEQW/giphy.gif",
+    "https://media.giphy.com/media/ge72kOBcmApplbyoXi/giphy.gif",
+    "https://media.giphy.com/media/9O5WJAiknhYxe8npHT/giphy.gif",
+    "https://media.giphy.com/media/HMUtJ4Wtgpcqt8nERg/giphy.gif",
+  ];
+  const DEFAULT_GIF =
+    "https://media.giphy.com/media/tqKUvQOOle9MG0gRHd/giphy.gif";
+
+  const gif = document.createElement("img");
+  gif.src = DEFAULT_GIF;
+  gif.alt = "Leave a review";
+  gif.className = "feedback-gif";
 
   const starsContainer = make("div", "feedback-stars");
   ["1", "2", "3", "4", "5"].forEach((val) => {
@@ -276,10 +301,10 @@ function renderFeedback() {
     starsContainer.appendChild(star);
   });
 
-  const btn = make("button", "btn btn--primary", "Ricomincia");
+  const btn = make("button", "btn btn--primary", "Invia voto");
   btn.id = "btn-restart";
 
-  screen.append(title, subtitle, starsContainer, btn);
+  screen.append(title, subtitle, gif, starsContainer, btn);
 
   let selected = 0;
   let locked = false;
@@ -318,12 +343,14 @@ function renderFeedback() {
         locked = false;
         selected = 0;
         updateStars(null);
+        gif.src = DEFAULT_GIF;
         localStorage.removeItem("quizRating");
         return;
       }
       selected = val;
       locked = true;
       updateStars(null);
+      gif.src = RATING_GIFS[val];
       localStorage.setItem("quizRating", selected);
     });
   });
@@ -378,6 +405,42 @@ function showResultNotification(passed) {
     () => overlay.remove(),
     NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT,
   );
+}
+
+// mostra il toast di ringraziamento dopo che l'utente invia il voto, poi sparisce in dissolvenza
+function showFeedbackThankYou(callback) {
+  const overlay = make("div", "toast-overlay");
+  const toast = make("div", "toast");
+  const media = make("div", "toast__media");
+
+  const image = document.createElement("img");
+  image.className = "toast__image";
+  image.src = "https://media.giphy.com/media/AquCieaLRDZTxH8UUZ/giphy.gif";
+  image.alt = "Grazie per il feedback!";
+  media.appendChild(image);
+
+  const content = make("div", "toast__content");
+  content.append(
+    make("strong", "toast__title", "Grazie!"),
+    make("p", "toast__text", "Il tuo voto è stato registrato."),
+  );
+
+  // mettiamo tutto insieme e lo aggiungiamo al DOM
+  toast.append(media, content);
+  overlay.appendChild(toast);
+  document.body.appendChild(overlay);
+
+  requestAnimationFrame(() => overlay.classList.add("toast-overlay--visible"));
+  // avviamo la dissolvenza in uscita dopo il tempo di visibilità
+  setTimeout(
+    () => overlay.classList.add("toast-overlay--hide"),
+    NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE,
+  );
+  // dopo l'animazione lo togliamo dal DOM e richiamiamo il callback
+  setTimeout(() => {
+    overlay.remove();
+    if (callback) callback();
+  }, NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT);
 }
 
 // ─── LOGICA ───────────────────────────────────────────────────────────────────

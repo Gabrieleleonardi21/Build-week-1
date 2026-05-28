@@ -1,10 +1,18 @@
-
+/* ─── RESET ───────────────────────────────────────────────────────────────────
+   Azzera margini, padding e imposta il box model su tutti gli elementi.
+   border-box fa sì che padding e bordi siano inclusi nelle dimensioni
+   dell'elemento invece di aggiungersi a esse.
+*/
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* ─── BODY ────────────────────────────────────────────────────────────────────
+   Imposta il font di sistema, lo sfondo con l'immagine dorata, il colore
+   del testo e centra tutto il contenuto in colonna con flexbox.
+*/
 body {
   font-family:
     system-ui,
@@ -18,8 +26,8 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-  background: #1b1535 url("../css/img/immagine\ gialla.jpg") center / cover no-repeat fixed;
-  color: #1b2845;
+  background: url("../css/img/sfondogiallobg.jpg") center / cover no-repeat fixed;
+  color: #3b2a00;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,6 +35,9 @@ body {
   padding: 24px;
 }
 
+/* ─── HEADER / BRAND ──────────────────────────────────────────────────────────
+   Contenitore del logo in alto a sinistra 
+*/
 .brand {
   width: 100%;
   max-width: 720px;
@@ -34,10 +45,15 @@ body {
   text-align: left;
 }
 
+/* Altezza fissa del logo */
 .brand-logo {
-  height: 36px;
+  height: 76px;
 }
 
+/* ─── CARD PRINCIPALE ─────────────────────────────────────────────────────────
+   Il contenitore bianco che racchiude tutte le schermate del quiz.
+   Ha angoli arrotondati, ombra e larghezza massima per leggibilità.
+*/
 #app {
   background: #ffffff;
   border-radius: 16px;
@@ -45,9 +61,13 @@ body {
   max-width: 720px;
   width: 100%;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  margin-top: -5px;
 }
 
-/* PAGINA INIZIALE */
+/* ════════════════════════════════════════════════════════════════════════════
+   SCHERMATA INIZIALE
+   ════════════════════════════════════════════════════════════════════════════ */
+
 
 .screen-welcome {
   display: flex;
@@ -56,13 +76,15 @@ body {
   gap: 20px;
 }
 
+/* Titolo grande del quiz */
 .welcome-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
   align-self: flex-start;
 }
 
+/* Testo descrittivo sotto il titolo */
 .welcome-description {
   font-size: 1.1rem;
   color: #555;
@@ -71,26 +93,34 @@ body {
   margin-bottom: 20px;
 }
 
+/* Lista delle regole del quiz senza pallini standard */
 .welcome-list {
   list-style: none;
   display: flex;
   flex-direction: column;
 }
 
+/* Ogni voce della lista con margine inferiore */
 .welcome-list li {
   font-size: 1.2rem;
-  color: #1b2845;
+  color: #3b2a00;
   margin-bottom: 10px;
 }
 
+/* Icona banana davanti a ogni voce al posto del pallino */
 .welcome-list li::before {
-  content: "★ ";
-  color: #1b2845;
+  content: "🍌 ";
+  font-size: 1.5rem;
+  color: #c49000;
 }
-/*BOTTONI*/
 
+/* ════════════════════════════════════════════════════════════════════════════
+   BOTTONI
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Stile base condiviso da tutti i bottoni */
 .btn {
-  background: #1b2845;
+  background: #F0B001;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -108,93 +138,105 @@ body {
 }
 
 .btn:hover {
-  background: #2c3e6b;
+  background: #eeaf01bb;
 }
 
+/* Bottone principale — oro pieno */
 .btn--primary {
-  background: #1b2845;
+  background: #EEAF01;
   color: #fff;
 }
 
+/* Bottone secondario — trasparente con bordo oro */
 .btn--secondary {
-  background: #f4f6fa;
-  color: #1b2845;
-  border: 2px solid #1b2845;
+  background: #fdf6dc;
+  color: #EEAF01;
+  border: 2px solid #EEAF01;
 }
 
 .btn--secondary:hover {
-  background: #e8ecf7;
+  background: #fffdf3;
 }
 
 .btn--primary:hover {
-  background: #2c3e6b;
+  background: #eeaf01bb;
 }
 
-/*QUIZ*/
+/* ════════════════════════════════════════════════════════════════════════════
+   SCHERMATA QUIZ
+   ════════════════════════════════════════════════════════════════════════════ */
 
+/* Colonna verticale con spazio tra header, domanda e risposte */
 .screen-quiz {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
+/* Riga superiore con contatore domande e timer */
 .quiz-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* Testo "Domanda X / Y" in grigio */
 .quiz-counter {
   font-size: 0.9rem;
   color: #888;
   font-weight: 500;
 }
 
+/* Contenitore icona + numero del timer */
 .quiz-timer-wrapper {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
 }
 
+/* Numero del conto alla rovescia */
 .quiz-timer {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
   transition: color 0.2s;
 }
 
-/*TEMPO IN SCADENZA*/
+/* Diventa rosso quando mancano 5 secondi */
 .quiz-timer--urgent {
   color: #e53935;
 }
 
+/* Testo della domanda */
 .quiz-question {
   font-size: 1.2rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #1b2845;
+  color: #3b2a00;
 }
 
+/* Colonna con i bottoni risposta */
 .quiz-answers {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+/* Singolo bottone risposta con lettera + testo */
 .quiz-answer {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #f4f6fa;
-  border: 2px solid #dde3ef;
+  background: #fdf6dc;
+  border: 2px solid #e8d48a;
   border-radius: 10px;
   padding: 14px 18px;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  color: #1b2845;
+  color: #3b2a00;
   cursor: pointer;
   text-align: left;
   transition:
@@ -203,15 +245,18 @@ body {
   width: 100%;
 }
 
+/* Hover solo se il bottone non è disabilitato */
 .quiz-answer:hover:not(:disabled) {
-  background: #e8ecf7;
-  border-color: #aab4d4;
+  background: #f7ecbb;
+  border-color: #c49000;
 }
 
+/* Dopo aver risposto i bottoni vengono disabilitati */
 .quiz-answer:disabled {
   cursor: default;
 }
 
+/* Cerchio con la lettera A/B/C/D */
 .quiz-answer__letter {
   display: inline-flex;
   align-items: center;
@@ -220,13 +265,13 @@ body {
   height: 28px;
   border-radius: 50%;
   flex-shrink: 0;
-  background: #dde3ef;
+  background: #e8d48a;
   font-size: 0.8rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
 }
 
-/*RISPOSTA CORRETTA*/
+/* Risposta corretta — verde */
 .quiz-answerTrue {
   background: #e8f5e9;
   border-color: #4caf50;
@@ -239,7 +284,7 @@ body {
   color: #fff;
 }
 
-/*RISPOSTA SBAGLIATA*/
+/* Risposta sbagliata — rosso */
 .quiz-answerFalse {
   background: #ffebee;
   border-color: #e53935;
@@ -252,8 +297,11 @@ body {
   color: #fff;
 }
 
-/* RISULTATI TEST */
+/* ════════════════════════════════════════════════════════════════════════════
+   SCHERMATA RISULTATI
+   ════════════════════════════════════════════════════════════════════════════ */
 
+/* Colonna centrata con tutti gli elementi del riepilogo */
 .screen-results {
   display: flex;
   flex-direction: column;
@@ -262,14 +310,16 @@ body {
   text-align: center;
 }
 
+/* Titolo "Risultati" allineato a sinistra */
 .results-subtitle {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
   width: 100%;
   text-align: left;
 }
 
+/* Messaggio promosso/bocciato allineato a sinistra */
 .results-message {
   font-size: 1rem;
   color: #555;
@@ -277,12 +327,16 @@ body {
   text-align: left;
 }
 
+/* Contenitore del grafico a torta — posizione relativa
+   per permettere al testo centrale di sovrapporsi */
 .chart-container {
   position: relative;
   width: 160px;
   height: 160px;
 }
 
+/* Cerchio con gradiente conico: verde per la percentuale corretta,
+   rosso per il resto. --pct viene impostato via JS */
 .chart-circle {
   width: 160px;
   height: 160px;
@@ -290,6 +344,7 @@ body {
   background: conic-gradient(#4caf50 var(--pct, 0%), #e53935 0);
 }
 
+/* Cerchio bianco centrale con la percentuale — effetto donut */
 .chart-label {
   position: absolute;
   top: 50%;
@@ -304,9 +359,10 @@ body {
   justify-content: center;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
 }
 
+/* Testo "X / Y risposte corrette" */
 .results-score-label {
   font-size: 1rem;
   color: #555;
@@ -317,6 +373,7 @@ body {
   color: #555;
 }
 
+/* Classe base del verdetto (non usata direttamente, usate verdictP/verdictB) */
 .verdict {
   font-size: 1.4rem;
   font-weight: 700;
@@ -324,36 +381,36 @@ body {
   border-radius: 50px;
 }
 
-/*PROMOSSO*/
 .verdict.promosso {
   background: #e8f5e9;
   color: #2e7d32;
 }
 
-/*BOCCIATO*/
 .verdict.bocciato {
   background: #ffebee;
   color: #c62828;
 }
 
-/*ANIMAZIONE CLESSIDRA*/
-
+/* ─── ANIMAZIONE CLESSIDRA ────────────────────────────────────────────────────
+   Ruota l'icona ⌛ di 360 gradi in loop per indicare il timer attivo.
+   Il filtro la colora di oro coerentemente con la palette.
+*/
 @keyframes ruota {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .quiz-timer-icon {
   display: inline-block;
   animation: ruota 1.5s ease-in-out infinite;
+  filter: sepia(1) saturate(4) hue-rotate(-30deg) brightness(0.95);
 }
 
-/*PROMOSSO*/
+/* ─── BADGE VERDETTO ──────────────────────────────────────────────────────────
+   Pillole colorate mostrate nella schermata risultati.
+*/
+
+/* Promosso — verde */
 .verdictP {
   background: #4bae50;
   color: #f9f6f4;
@@ -363,7 +420,7 @@ body {
   font-weight: bold;
 }
 
-/*BOCCIATO*/
+/* Bocciato — rosso */
 .verdictB {
   background: #e53935;
   color: #f9f6f4;
@@ -372,7 +429,12 @@ body {
   font-size: 1.4rem;
   font-weight: bold;
 }
-/* LISTA RIEPILOGO DOMANDE */
+
+/* ════════════════════════════════════════════════════════════════════════════
+   LISTA RIEPILOGO DOMANDE
+   Ogni voce mostra se la risposta era corretta o sbagliata,
+   con un bordo laterale colorato tramite gradiente.
+   ════════════════════════════════════════════════════════════════════════════ */
 
 .results-list {
   list-style: none;
@@ -389,6 +451,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* Voce corretta — sfondo verde chiaro con bordo sinistro verde */
 .results-item--correct {
   background:
     linear-gradient(#e8f5e9, #e8f5e9) padding-box,
@@ -396,6 +459,7 @@ body {
   border: 2px solid transparent;
 }
 
+/* Voce sbagliata — sfondo rosso chiaro con bordo sinistro rosato */
 .results-item--wrong {
   background:
     linear-gradient(#ffebee, #ffebee) padding-box,
@@ -403,12 +467,14 @@ body {
   border: 2px solid transparent;
 }
 
+/* Riga con icona ✓/✗ e testo della domanda */
 .results-item__header {
   display: flex;
   align-items: flex-start;
   gap: 8px;
 }
 
+/* Icona ✓ o ✗ */
 .results-item__icon {
   font-size: 1.2rem;
   font-weight: 900;
@@ -416,19 +482,17 @@ body {
   margin-top: 2px;
 }
 
-.results-item--correct .results-itemicon {
-  color: #2e7d32;
-}
-.results-item--wrong .results-itemicon {
-  color: #c62828;
-}
+.results-item--correct .results-itemicon { color: #2e7d32; }
+.results-item--wrong .results-itemicon   { color: #c62828; }
 
+/* Testo della domanda */
 .results-item__question {
   font-size: 1rem;
-  color: #1b2845;
+  color: #3b2a00;
   line-height: 1.4;
 }
 
+/* Suggerimento con la risposta corretta, visibile solo se sbagliata */
 .results-item__hint {
   font-size: 0.9rem;
   color: #888;
@@ -436,13 +500,20 @@ body {
   padding-left: 22px;
 }
 
+/* Testo in grassetto con la risposta giusta */
 .results-item__correct-answer {
   color: #437943;
   font-weight: 500;
   font-style: italic;
 }
 
-/* NOTIFICA CENTRALE */
+/* ════════════════════════════════════════════════════════════════════════════
+   TOAST / NOTIFICA CENTRALE
+   Overlay semitrasparente con card animata che mostra la gif di promosso
+   o bocciato. Appare in fade-in e scompare dopo qualche secondo.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Sfondo scuro che copre tutta la pagina — invisibile di default */
 .toast-overlay {
   position: fixed;
   inset: 0;
@@ -456,16 +527,19 @@ body {
   z-index: 1000;
 }
 
+/* Classe aggiunta via JS per renderlo visibile */
 .toast-overlay--visible {
   opacity: 1;
   pointer-events: auto;
 }
 
+/* Classe aggiunta via JS per farlo sparire */
 .toast-overlay--hide {
   opacity: 0;
   transition: opacity 1.2s ease;
 }
 
+/* Card bianca con gif e testo — entra dal basso con animazione */
 .toast {
   display: flex;
   align-items: center;
@@ -479,22 +553,26 @@ body {
   animation: toast-slide-in 0.6s ease forwards;
 }
 
+/* Riquadro circolare della gif a sinistra.
+   min-width e min-height impediscono che flexbox lo schiacci. */
 .toast__media {
   width: 160px;
   height: 160px;
-  display: grid;
-  place-items: center;
-  border-radius: 20px;
-  background: #f1f5ff;
-  overflow: hidden;
+  min-width: 160px;
+  min-height: 160px;
+  border-radius: 50%;
 }
 
+/* Gif che riempie il cerchio — border-radius necessario
+   perché l'img non eredita l'overflow del contenitore */
 .toast__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
+/* La gif del promosso ha il soggetto sulla destra */
 .toast__image--passed {
   object-position: 80% center;
 }
@@ -507,53 +585,65 @@ body {
   justify-content: center;
   font-size: 2.8rem;
   border-radius: 18px;
-  color: #1b2845;
+  color: #3b2a00;
 }
 
 .toast__placeholder--demo {
-  border: 3px solid #1b2845;
+  border: 3px solid #c49000;
   background: rgba(255, 255, 255, 0.92);
 }
 
+/* Testo a destra della gif */
 .toast__content {
   text-align: left;
 }
 
+/* Titolo "Promosso!" o "Bocciato!" */
 .toast__title {
   display: block;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #1b2845;
+  color: #3b2a00;
   margin-bottom: 8px;
 }
 
+/* Testo descrittivo sotto il titolo */
 .toast__text {
   color: #555;
   line-height: 1.5;
 }
 
+/* La card sale dal basso e diventa opaca */
 @keyframes toast-slide-in {
   from {
     transform: translateY(16px);
     opacity: 0;
   }
-
   to {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
+/* ════════════════════════════════════════════════════════════════════════════
+   SCHERMATA FEEDBACK — STELLE/BANANE
+   Le emoji sono grigie di default e si colorano all'hover e al click.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Contenitore centrato delle banane */
 .feedback-stars {
   width: 100%;
   text-align: center;
   margin-top: 20px;
   margin-bottom: 15px;
 }
+
+/* Spazio tra le banane */
 .feedback-star {
   letter-spacing: 10px;
 }
 
+/* Stato di default — banana grigia e semitrasparente */
 .feedback-star {
   font-size: 4rem;
   cursor: pointer;
@@ -566,23 +656,131 @@ body {
   display: inline;
 }
 
+/* Hover o attiva — banana colorata */
 .feedback-star:hover,
 .feedback-star--active {
   filter: sepia(1) saturate(4) hue-rotate(-10deg) brightness(0.95);
   opacity: 1;
 }
 
+/* Attiva — leggermente ingrandita */
 .feedback-star--active {
   opacity: 1;
   transform: scale(1.15);
 }
 
-.feedback-star--locked {
-  filter: grayscale(0%); 
-}
-
+/* Bloccata dopo il click — rimane colorata */
 .feedback-star--active,
 .feedback-star--locked {
   filter: grayscale(0%);
   opacity: 1;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Tablet (≤ 768px) — riduciamo padding e font size */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+
+  #app {
+    padding: 28px 24px;
+  }
+
+  .welcome-title {
+    font-size: 1.6rem;
+  }
+
+  .quiz-question {
+    font-size: 1.1rem;
+  }
+
+  .results-subtitle,
+  .feedback-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile (≤ 480px) — layout più compatto per schermi piccoli */
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .brand {
+    margin-bottom: 16px;
+  }
+
+  #app {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .welcome-title {
+    font-size: 1.4rem;
+  }
+
+  .welcome-description {
+    font-size: 1rem;
+  }
+
+  .welcome-list li {
+    font-size: 1rem;
+  }
+
+  .quiz-question {
+    font-size: 1rem;
+  }
+
+  .quiz-answer {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+
+  .quiz-answer__letter {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+
+  .verdictP,
+  .verdictB {
+    font-size: 1.1rem;
+    padding: 8px 20px;
+  }
+
+  .chart-container,
+  .chart-circle {
+    width: 130px;
+    height: 130px;
+  }
+
+  .chart-label {
+    width: 82px;
+    height: 82px;
+    font-size: 1.1rem;
+  }
+
+  .feedback-star {
+    font-size: 2.2rem;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ─── GIF FEEDBACK ────────────────────────────────────────────────────────────
+   Gif centrata nella schermata feedback, ritagliata in cerchio.
+*/
+.feedback-gif {
+  display: block;
+  margin: 0 auto;
+  max-width: 220px;
+  width: 100%;
+  border-radius: 50%;
 }
