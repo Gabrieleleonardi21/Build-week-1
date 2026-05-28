@@ -297,7 +297,7 @@ function renderFeedback() {
     starsContainer.appendChild(star);
   });
 
-  const btn = make("button", "btn btn--primary", "Ricomincia");
+  const btn = make("button", "btn btn--primary", "Invia voto");
   btn.id = "btn-restart";
 
   screen.append(title, subtitle, gif, starsContainer, btn);
