@@ -1,176 +1,179 @@
 
 <p align="center">
-<img src="https://img.shields.io/badge/Quiz-App-blueviolet?style=for-the-badge&logo=javascript&logoColor=white" />
-<img src="https://img.shields.io/badge/Status-Work%20In%20Progress-yellow?style=for-the-badge" />
-<img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Quiz-Tech-c49000?style=for-the-badge&logo=javascript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Status-Completato-4caf50?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
 </p>
 
-<h1 align="center">🎯 Quiz Application</h1>
+<h1 align="center">🍌 Quiz Tech</h1>
 <p align="center">
-<em>Un'applicazione quiz interattiva, randomizzata e timer-based</em><br>
-<strong>Font:</strong> Roboto &nbsp;·&nbsp; <strong>Background:</strong> Epicode Theme
+  <em>Un quiz interattivo su tecnologia e informatica — timer, shuffle, feedback visivo e molto altro</em><br>
+  <strong>Build Week 1 — Epicode · Team 1</strong>
 </p>
 
 ---
 
-## 📋 Indice
+## Indice
 
-- [Descrizione](#-descrizione)
-- [Tecnologie](#-tecnologie)
-- [Struttura dell'App](#-struttura-dellapp)
-- [Funzionalità](#-funzionalità)
-- [Funzioni Implementate](#-funzioni-implementate)
-- [Logica del Quiz](#-logica-del-quiz)
-- [Team & Divisione del Lavoro](#-team--divisione-del-lavoro)
-
----
-
-## 📝 Descrizione
-
-Applicazione web single-page che guida l'utente attraverso un quiz di **10 domande** con risposte multiple.
-Le domande e le opzioni vengono presentate in **ordine randomizzato** ad ogni avvio.
-Un **timer visivo** con icona a clessidra accompagna ogni domanda, imponendo un ritmo di gioco dinamico.
+- [Descrizione](#descrizione)
+- [Tecnologie](#tecnologie)
+- [Struttura del progetto](#struttura-del-progetto)
+- [Schermate](#schermate)
+- [Funzionalità](#funzionalità)
+- [Configurazione](#configurazione)
+- [Avvio](#avvio)
+- [Team](#team)
 
 ---
 
-## 🛠 Tecnologie
+## Descrizione
 
-| Stack | Descrizione |
+**Quiz Tech** è una web app single-page che mette alla prova le conoscenze di tecnologia e informatica dell'utente attraverso **20 domande a risposta multipla** con timer, shuffling automatico e feedback istantaneo.
+
+Al termine del quiz viene mostrata una schermata dei risultati con grafico a torta, verdetto promosso/bocciato, riepilogo di ogni risposta e la possibilità di lasciare una valutazione con le 🍌.
+
+---
+
+## Tecnologie
+
+| Stack | Utilizzo |
 |---|---|
 | `HTML5` | Struttura semantica della pagina |
-| `CSS3` | Styling con font **Roboto** e background Epicode |
-| `JavaScript (Vanilla)` | Logica applicativa, randomizzazione, timer, localStorage |
+| `CSS3` | Layout, animazioni, responsive design |
+| `JavaScript ES Modules` | Logica applicativa, rendering dinamico, localStorage |
+| `canvas-confetti` | Animazione coriandoli alla promozione |
+| `Google Fonts — Roboto` | Tipografia |
 
 ---
 
-## 🏗 Struttura dell'App
-
-L'intera applicazione è gestita all'interno di un unico container `#app`, il cui contenuto viene aggiornato dinamicamente in base alla variabile **`currentScreen`**.
-
-### Struttura della schermata Quiz
+## Struttura del progetto
 
 ```
-<p>   → Numero domanda
-<h3>  → Titolo della domanda
-<div> → Bottoni risposta
-⏳    → Timer con clessidra affiancata
+Build-week-1/
+├── index.html
+├── questions.json
+└── assets/
+    ├── css/
+    │   └── style.css
+    ├── js/
+    │   └── script.js
+    └── img/
+        ├── epicode-logo.png
+        └── bg.jpg
 ```
 
-### Schermate disponibili
+Le domande sono caricate da `questions.json` tramite `fetch` all'avvio, così il file delle domande è modificabile senza toccare il codice.
 
-| Schermata | Descrizione |
+---
+
+## Schermate
+
+### Welcome
+Mostra il titolo, una breve descrizione e le regole del quiz (numero domande, secondi per risposta, soglia di superamento). Il pulsante **Inizia** fa partire la sessione.
+
+### Quiz
+Per ogni domanda vengono mostrati:
+- Contatore `Domanda X / 20`
+- Timer con clessidra animata (⌛) che conta alla rovescia da 20 secondi; diventa rosso sotto i 5 secondi
+- Testo della domanda
+- Quattro bottoni risposta con lettera (A / B / C / D) in ordine casuale
+
+Alla selezione di una risposta:
+- Il bottone scelto diventa **verde** (corretto) o **rosso** (errato)
+- Se errato, viene evidenziata in verde la risposta corretta
+- Dopo 2 secondi si avanza automaticamente alla domanda successiva
+
+Se il tempo scade senza risposta, la domanda viene registrata come sbagliata e si avanza.
+
+### Risultati
+- Messaggio di esito e verdetto **Promosso!** / **Bocciato** con badge colorato
+- Grafico a torta (`conic-gradient`) con percentuale al centro
+- Riepilogo `X / 20 risposte corrette`
+- Lista di tutte le domande con icona ✓ / ✗ e, per le sbagliate, la risposta corretta evidenziata
+- Toast con GIF animata che appare e svanisce in dissolvenza
+- Coriandoli con `canvas-confetti` in caso di promozione
+- Pulsanti **Riprova** e **Lascia un voto**
+
+### Feedback
+Valutazione con 5 emoji 🍌 interattive: hover per anteprima, click per bloccare il voto, secondo click per toglierlo. Il voto viene salvato in `localStorage`.
+
+---
+
+## Funzionalità
+
+| Funzionalità | Dettaglio |
 |---|---|
-| **Welcome** | Schermata di benvenuto con call-to-action per iniziare il quiz |
-| **Quiz** | Itera 10 volte in ordine randomizzato. Mostra numero domanda, titolo, risposte e timer |
-| **Results** | Schermata finale con punteggio totale e diagramma riassuntivo |
+| Shuffle domande | L'array delle domande viene mescolato con Fisher-Yates ad ogni sessione |
+| Shuffle risposte | Le 4 opzioni di ogni domanda vengono riordinate casualmente |
+| Timer per domanda | 20 secondi; urgenza visiva sotto i 5 secondi |
+| Feedback immediato | Verde/rosso sui bottoni + evidenziazione risposta corretta |
+| Cronologia sessione | Ogni risposta viene salvata in `localStorage` e letta dalla schermata risultati |
+| Grafico a torta | Costruito solo con CSS (`conic-gradient`) |
+| Toast result | Overlay con GIF e messaggio che appare e sparisce con animazione |
+| Confetti | Attivato solo in caso di promozione |
+| Rating con emoji | 5 🍌 con hover, selezione e toggle; voto persistito in `localStorage` |
+| Responsive | Layout adattivo per tablet (≤ 768 px) e mobile (≤ 480 px) |
 
 ---
 
-## ✨ Funzionalità
+## Configurazione
 
-- 🎲 **Randomizzazione** — domande e risposte vengono mescolate ad ogni sessione
-- ⏳ **Timer** — countdown visivo con icona a clessidra affiancata al testo
-- 🎨 **Feedback visivo immediato:**
-  - ✅ Risposta corretta → bottone **verde**
-  - ❌ Risposta errata → bottone **rosso** + illuminazione della risposta corretta
-  - ⏰ Tempo scaduto → evidenziazione della risposta corretta + registrazione errore + avanzamento automatico
-- 📊 **Diagramma finale** — visualizzazione grafica dei risultati (non barre)
-- 💾 **Persistenza** — salvataggio del punteggio finale in `localStorage`
+Le costanti principali sono in cima a `assets/js/script.js`:
 
----
-
-## ⚙️ Funzioni Implementate
-
-| Funzione | Descrizione |
-|---|---|
-| `render()` | Router principale: controlla `currentScreen` e invoca la funzione di rendering corretta |
-| `renderWelcome()` | Costruisce e inietta la schermata di benvenuto |
-| `renderQuiz()` | Renderizza la domanda corrente: numero `<p>`, titolo `<h3>`, bottoni risposta, timer con clessidra |
-| `renderResults()` | Genera la schermata finale con punteggio e diagramma |
-| `startTimer()` | Avvia il countdown tramite `setInterval` |
-| `stopTimer()` | Interrompe il countdown tramite `clearInterval` |
-| `handleAnswer()` | Colora i bottoni (verde/rosso), aggiorna il punteggio, attende `FEEDBACK_DELAY` ms prima di procedere |
-| `handleTimeUp()` | Gestisce la scadenza del tempo: registra errore, evidenzia risposta corretta, avanza |
-| `advance()` | Passa alla domanda successiva o, se completate tutte le 10, reindirizza ai risultati |
-| `saveResults()` | Salva il punteggio finale dell'utente nel `localStorage` |
-
----
-
-## 🧠 Logica del Quiz
-
-### Randomizzazione
-
-1. All'avvio del quiz, l'array `QUESTIONS` viene mescolato
-2. Ad ogni domanda viene assegnato un `id` univoco dalla coppia rendering prima dell'inizio
-3. Le risposte di ogni singola domanda vengono a loro volta randomizzate prima della visualizzazione
-
-### Ciclo di vita di una domanda
-
+```js
+const TOTAL_QUESTIONS = QUESTIONS.length; // numero domande da questions.json
+const PASS_THRESHOLD = 60;                // % minima per essere promosso
+const TIMER_DURATION = 20;               // secondi per domanda
+const FEEDBACK_DELAY = 2000;            // ms di attesa dopo la risposta prima di avanzare
 ```
-renderQuiz() → startTimer()
-      │
-      ├─ Risposta data → handleAnswer() → [feedback FEEDBACK_DELAY ms] → advance()
-      │
-      └─ Tempo scaduto → handleTimeUp() → [mostra corretta] → advance()
-                                                    │
-                                          ultima domanda?
-                                          ├─ Sì → saveResults() → renderResults()
-                                          └─ No → renderQuiz()
+
+Per aggiungere o modificare domande basta editare `questions.json` mantenendo la struttura:
+
+```json
+{
+  "id": "q01",
+  "question": "Testo della domanda",
+  "correct_answer": "Risposta corretta",
+  "incorrect_answers": ["Opzione A", "Opzione B", "Opzione C"]
+}
 ```
 
 ---
 
-## 👥 Team & Divisione del Lavoro
+## Avvio
 
-### Coppia Rendering — Alberto & Gabriele
+Il file `script.js` usa `fetch` e i moduli ES, quindi richiede un server HTTP (non funziona aprendo direttamente il file con `file://`).
 
-> `render()` · `renderWelcome()` · `renderQuiz()` · `renderResults()`
+**Con VS Code** — installa l'estensione *Live Server* e clicca **Go Live**.
 
-- Aggiungono gli `id` alle domande nell'array `QUESTIONS`
-- Comunicano a tutto il team i nomi delle **classi CSS** usate prima che gli altri inizino
+**Con Node.js:**
 
----
+```bash
+npx serve .
+```
 
-### Logica Risposte — Manuel
+**Con Python:**
 
-> `handleAnswer()` · `advance()`
+```bash
+python3 -m http.server 8080
+```
 
-- Gestisce il feedback visivo e l'avanzamento dopo `1500ms`
-- Si coordina con la coppia sulla struttura DOM di `renderQuiz()`
-
----
-
-### Timer — Nicole
-
-> `startTimer()` · `stopTimer()` · `handleTimeUp()`
-
-- Gestisce la logica della clessidra (l'animazione CSS è assegnata al CSS)
+Poi apri `http://localhost:8080` nel browser.
 
 ---
 
-### CSS — Yhara
+## Team
 
-> Welcome · Quiz · Results · Clessidra
-
-- Aspetta i nomi delle classi dalla coppia prima di iniziare
-
-| Area | Classi principali |
+| Membro | Contributo |
 |---|---|
-| CSS Welcome | Stili schermata iniziale |
-| CSS Quiz | Domanda, bottoni, timer, counter, `.correct` / `.wrong` |
-| CSS Results | Percentuale, diagramma, verdetto |
-| CSS Clessidra | Icona e animazione del timer |
-
----
-
-### Da assegnare — `saveResults()`
-
-> Suggerimento: assegnare a Manuel, contiguo ad `advance()`
-
-Salva il punteggio finale in `localStorage`. Se il tempo lo consente, aggiungere il confronto dettagliato domande giuste/sbagliate.
+| **Alberto** | Rendering schermate, struttura DOM |
+| **Gabriele** | Rendering schermate, struttura DOM |
+| **Manuel** | Logica risposte, avanzamento, `handleAnswer` |
+| **Nicole** | Timer, `startTimer`, `stopTimer`, `handleTimeUp` |
+| **Yhara** | CSS — Welcome, Quiz, Results, animazione clessidra |
 
 ---
 
 <p align="center">
-<sub>Build Week 1 — Epicode · Team 1</sub>
+  <sub>Build Week 1 — Epicode · Team 1</sub>
 </p>
