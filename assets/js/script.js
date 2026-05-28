@@ -1,12 +1,13 @@
-// le domande del quiz
+// manda una richiesta HTTP al file questions.json(fetch) in locale e aspetta la risposta(await)
 const response = await fetch("questions.json");
+// legge il corpo della risposta, lo converte da testo JSON ad array JavaScript e aspetta che finisca
 const QUESTIONS = await response.json();
 
 // quante domande ci sono, quanto tempo hai e timing gifs post risultato
 const TOTAL_QUESTIONS = QUESTIONS.length;
-const PASS_THRESHOLD = 60;
+const PASS_THRESHOLD = 0;
 const TIMER_DURATION = 20;
-const FEEDBACK_DELAY = 2000;
+const FEEDBACK_DELAY = 0;
 const NOTIFICATION_FADE_IN = 2000;
 const NOTIFICATION_VISIBLE = 1500;
 const NOTIFICATION_FADE_OUT = 1200;
@@ -272,10 +273,23 @@ function renderFeedback() {
   const screen = make("div", "screen-feedback");
   const title = make("h3", "feedback-title", "Che ne pensi del quiz?");
   const subtitle = make("p", "feedback-subtitle", "Valutaci!!!");
+
+  const RATING_GIFS = [
+    null,
+    "https://media.giphy.com/media/VlfPeu5N36sm2CWBMq/giphy.gif",
+    "https://media.giphy.com/media/H37dlCM5A2UKq6VEQW/giphy.gif",
+    "https://media.giphy.com/media/ge72kOBcmApplbyoXi/giphy.gif",
+    "https://media.giphy.com/media/9O5WJAiknhYxe8npHT/giphy.gif",
+    "https://media.giphy.com/media/HMUtJ4Wtgpcqt8nERg/giphy.gif",
+  ];
+  const DEFAULT_GIF =
+    "https://media.giphy.com/media/tqKUvQOOle9MG0gRHd/giphy.gif";
+
   const gif = document.createElement("img");
-  gif.src = "https://media.giphy.com/media/tqKUvQOOle9MG0gRHd/giphy.gif";
+  gif.src = DEFAULT_GIF;
   gif.alt = "Leave a review";
   gif.className = "feedback-gif";
+
   const starsContainer = make("div", "feedback-stars");
   ["1", "2", "3", "4", "5"].forEach((val) => {
     const star = make("span", "feedback-star", "🍌");
@@ -286,7 +300,7 @@ function renderFeedback() {
   const btn = make("button", "btn btn--primary", "Ricomincia");
   btn.id = "btn-restart";
 
-  screen.append(title, subtitle, starsContainer, btn);
+  screen.append(title, subtitle, gif, starsContainer, btn);
 
   let selected = 0;
   let locked = false;
@@ -325,12 +339,14 @@ function renderFeedback() {
         locked = false;
         selected = 0;
         updateStars(null);
+        gif.src = DEFAULT_GIF;
         localStorage.removeItem("quizRating");
         return;
       }
       selected = val;
       locked = true;
       updateStars(null);
+      gif.src = RATING_GIFS[val];
       localStorage.setItem("quizRating", selected);
     });
   });

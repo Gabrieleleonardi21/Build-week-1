@@ -116,38 +116,26 @@ body {
 }
 
 .btn:hover {
-<<<<<<< HEAD
   background: #eeaf01bb;
 }
 
 .btn--primary {
   background: #EEAF01;
-=======
-  background: #c2920e;
-}
-
-.btn--primary {
-  background: #F0B001;
->>>>>>> 3e10d771437f19daad73665856c1d067d96fcf1c
   color: #fff;
 }
 
 .btn--secondary {
   background: #fdf6dc;
-  color: #c49000;
-  border: 2px solid #c49000;
+  color: #EEAF01;
+  border: 2px solid #EEAF01;
 }
 
 .btn--secondary:hover {
-  background: #f7ecbb;
+  background: #fffdf3;
 }
 
 .btn--primary:hover {
-<<<<<<< HEAD
   background: #eeaf01bb;
-=======
-  background: #c2920e;
->>>>>>> 3e10d771437f19daad73665856c1d067d96fcf1c
 }
 
 /*QUIZ*/
@@ -702,4 +690,13 @@ body {
     padding: 12px 24px;
     font-size: 0.95rem;
   }
+}
+/* ────────────────────────────────────GIF─────────────────────────────────────── */
+.feedback-gif {
+  display: block;
+  margin: 0 auto;
+  max-width: 220px;
+  width: 100%;
+  border-radius: 50%;
+
 }
