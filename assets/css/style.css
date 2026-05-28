@@ -98,7 +98,7 @@ body {
 /*BOTTONI*/
 
 .btn {
-  background: #c49000;
+  background: #F0B001;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -116,26 +116,26 @@ body {
 }
 
 .btn:hover {
-  background: #9a7000;
+  background: #eeaf01bb;
 }
 
 .btn--primary {
-  background: #c49000;
+  background: #EEAF01;
   color: #fff;
 }
 
 .btn--secondary {
   background: #fdf6dc;
-  color: #c49000;
-  border: 2px solid #c49000;
+  color: #EEAF01;
+  border: 2px solid #EEAF01;
 }
 
 .btn--secondary:hover {
-  background: #f7ecbb;
+  background: #fffdf3;
 }
 
 .btn--primary:hover {
-  background: #9a7000;
+  background: #eeaf01bb;
 }
 
 /*QUIZ*/
@@ -360,6 +360,7 @@ body {
   display: inline-block;
   animation: ruota 1.5s ease-in-out infinite;
   filter: sepia(1) saturate(4) hue-rotate(-30deg) brightness(0.95);
+
 }
 
 /*PROMOSSO*/
@@ -555,14 +556,6 @@ body {
   }
 }
 
-.feedback-gif {
-  display: block;
-  margin: 0 auto;
-  max-width: 320px;
-  width: 100%;
-  border-radius: 12px;
-}
-
 .feedback-stars {
   width: 100%;
   text-align: center;
@@ -697,4 +690,12 @@ body {
     padding: 12px 24px;
     font-size: 0.95rem;
   }
+}
+/* ────────────────────────────────────GIF─────────────────────────────────────── */
+.feedback-gif {
+  display: block;
+  margin: 0 auto;
+  max-width: 220px;
+  width: 100%;
+  border-radius: 50%;
 }
