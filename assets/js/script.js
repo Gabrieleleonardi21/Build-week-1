@@ -7,7 +7,7 @@ const QUESTIONS = await response.json();
 const TOTAL_QUESTIONS = QUESTIONS.length;
 const PASS_THRESHOLD = 60;
 const TIMER_DURATION = 20;
-const FEEDBACK_DELAY = 2000;
+const FEEDBACK_DELAY = 1500;
 const NOTIFICATION_FADE_IN = 2000;
 const NOTIFICATION_VISIBLE = 1500;
 const NOTIFICATION_FADE_OUT = 1200;
@@ -19,7 +19,7 @@ let currentQuestion = 0;
 let score = 0;
 let shuffledAnswers = [];
 let shuffledQuestions = [];
-let timerId = null;
+let timerId = null; //non ha id di partenza perché non è attivo finché non parte il quiz
 
 // ─── LOCAL STORAGE ────────────────────────────────────────────────────────────
 
@@ -27,12 +27,12 @@ let timerId = null;
 const HISTORY_KEY = "quizHistory";
 
 // legge, aggiunge e cancella la cronologia dal browser
-const getHistory = () => JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+const getHistory = () => JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");//JSON.parse() prende quella stringa e la trasforma in un array JavaScript reale con cui puoi lavorare.
 const pushHistory = (item) => {
   const h = getHistory();
   h.push(item);
   localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
-};
+}; //riconverte l'array in stringa JSON con JSON.stringify() e lo salva nel localStorage
 const clearHistory = () => localStorage.removeItem(HISTORY_KEY);
 
 // ─── UTILITY ──────────────────────────────────────────────────────────────────
@@ -47,13 +47,13 @@ const make = (tag, className, text) => {
 
 // mescola un array
 const shuffle = (arr) => {
-  const a = [...arr];
+  const a = [...arr]; //si crea una copia dell'array originale per non modificarlo direttamente, creando un arrayvuoto e poi riempiendolo con gli stessi elementi. In questo modo, possiamo mescolare l'array senza alterare l'ordine originale dei dati, che potrebbe essere utile se vogliamo riutilizzarli in seguito o mantenere una versione non modificata.
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [a[i], a[j]] = [a[j], a[i]]; //swap (concetto algoritmico): tra l'elemento corrente (a[i]) e un elemento casuale precedente (a[j]), dove j è un indice casuale compreso tra 0 e i. Questo processo viene ripetuto per ogni elemento dell'array, partendo dall'ultimo e procedendo verso il primo, garantendo che ogni elemento abbia la stessa probabilità di finire in qualsiasi posizione dell'array mescolato.
   }
   return a;
-};
+}; //vedi shuffle(questions) in renderQuiz() per esempio, così ogni volta che partiamo un quiz le domande e le risposte sono in ordine diverso
 // ─── RENDERIZZAZIONE ───────────────────────────────────────────────────────────────────
 
 render();
@@ -69,7 +69,7 @@ function render() {
     app.appendChild(renderWelcome());
     document.querySelector("#btn-start").addEventListener("click", handleStart);
   } else if (currentScreen === "quiz") {
-    if (currentQuestion === 0) shuffledQuestions = shuffle(QUESTIONS);
+    if (currentQuestion === 0) shuffledQuestions = shuffle(QUESTIONS); //qui viene valorizzata la funzione che abbiamo creato prima con la variabile questions che è il contenuto del file json
     app.appendChild(renderQuiz());
     startTimer();
     document.querySelectorAll(".quiz-answer").forEach((btn) => {
