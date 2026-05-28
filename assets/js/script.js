@@ -1,6 +1,6 @@
-
-// le domande del quiz
+// manda una richiesta HTTP al file questions.json(fetch) in locale e aspetta la risposta(await)
 const response = await fetch("questions.json");
+// legge il corpo della risposta, lo converte da testo JSON ad array JavaScript e aspetta che finisca
 const QUESTIONS = await response.json();
 
 // quante domande ci sono, quanto tempo hai e timing gifs post risultato
@@ -14,7 +14,7 @@ const NOTIFICATION_FADE_OUT = 1200;
 
 // qui teniamo traccia di dove siamo nel quiz
 let currentScreen = "welcome";
-// "welcome" | "quiz" | "results" 
+// "welcome" | "quiz" | "results"
 let currentQuestion = 0;
 let score = 0;
 let shuffledAnswers = [];
@@ -176,8 +176,15 @@ function renderQuiz() {
 function renderResults() {
   const percentage = Math.round((score / TOTAL_QUESTIONS) * 100);
   const passed = percentage >= PASS_THRESHOLD;
-
-  const screen = make("div", "screen-results");
+if (passed) setTimeout(() => confetti({
+  particleCount: 200,
+  angle: 90,
+  spread: 180,
+  origin: { x: 0.5, y: 0 },
+  scalar: 2,
+  ticks: 400
+}), 1000);
+const screen = make("div", "screen-results");
   const subtitle = make("h3", "results-subtitle", "Risultati");
   const message = make(
     "p",
