@@ -1,12 +1,13 @@
-// le domande del quiz
+// manda una richiesta HTTP al file questions.json(fetch) in locale e aspetta la risposta(await)
 const response = await fetch("questions.json");
+// legge il corpo della risposta, lo converte da testo JSON ad array JavaScript e aspetta che finisca
 const QUESTIONS = await response.json();
 
 // quante domande ci sono, quanto tempo hai e timing gifs post risultato
 const TOTAL_QUESTIONS = QUESTIONS.length;
-const PASS_THRESHOLD = 60;
+const PASS_THRESHOLD = 0;
 const TIMER_DURATION = 20;
-const FEEDBACK_DELAY = 2000;
+const FEEDBACK_DELAY = 0;
 const NOTIFICATION_FADE_IN = 2000;
 const NOTIFICATION_VISIBLE = 1500;
 const NOTIFICATION_FADE_OUT = 1200;
@@ -436,13 +437,10 @@ function showFeedbackThankYou(callback) {
     NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE,
   );
   // dopo l'animazione lo togliamo dal DOM e richiamiamo il callback
-  setTimeout(
-    () => {
-      overlay.remove();
-      if (callback) callback();
-    },
-    NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT,
-  );
+  setTimeout(() => {
+    overlay.remove();
+    if (callback) callback();
+  }, NOTIFICATION_FADE_IN + NOTIFICATION_VISIBLE + NOTIFICATION_FADE_OUT);
 }
 
 // ─── LOGICA ───────────────────────────────────────────────────────────────────

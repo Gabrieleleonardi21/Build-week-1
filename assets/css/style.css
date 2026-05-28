@@ -68,6 +68,7 @@ body {
    SCHERMATA INIZIALE
    ════════════════════════════════════════════════════════════════════════════ */
 
+
 .screen-welcome {
   display: flex;
   flex-direction: column;
@@ -119,7 +120,7 @@ body {
 
 /* Stile base condiviso da tutti i bottoni */
 .btn {
-  background: #f0b001;
+  background: #F0B001;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -142,15 +143,15 @@ body {
 
 /* Bottone principale — oro pieno */
 .btn--primary {
-  background: #eeaf01;
+  background: #EEAF01;
   color: #fff;
 }
 
 /* Bottone secondario — trasparente con bordo oro */
 .btn--secondary {
   background: #fdf6dc;
-  color: #eeaf01;
-  border: 2px solid #eeaf01;
+  color: #EEAF01;
+  border: 2px solid #EEAF01;
 }
 
 .btn--secondary:hover {
@@ -395,12 +396,8 @@ body {
    Il filtro la colora di oro coerentemente con la palette.
 */
 @keyframes ruota {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .quiz-timer-icon {
@@ -485,12 +482,8 @@ body {
   margin-top: 2px;
 }
 
-.results-item--correct .results-itemicon {
-  color: #2e7d32;
-}
-.results-item--wrong .results-itemicon {
-  color: #c62828;
-}
+.results-item--correct .results-itemicon { color: #2e7d32; }
+.results-item--wrong .results-itemicon   { color: #c62828; }
 
 /* Testo della domanda */
 .results-item__question {
