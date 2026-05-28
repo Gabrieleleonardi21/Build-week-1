@@ -1,6 +1,5 @@
-// manda una richiesta HTTP al file questions.json(fetch) in locale e aspetta la risposta(await)
+// le domande del quiz
 const response = await fetch("questions.json");
-// legge il corpo della risposta, lo converte da testo JSON ad array JavaScript e aspetta che finisca
 const QUESTIONS = await response.json();
 
 // quante domande ci sono, quanto tempo hai e timing gifs post risultato
