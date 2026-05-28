@@ -5,9 +5,9 @@ const QUESTIONS = await response.json();
 
 // quante domande ci sono, quanto tempo hai e timing gifs post risultato
 const TOTAL_QUESTIONS = QUESTIONS.length;
-const PASS_THRESHOLD = 0;
+const PASS_THRESHOLD = 60;
 const TIMER_DURATION = 20;
-const FEEDBACK_DELAY = 0;
+const FEEDBACK_DELAY = 2000;
 const NOTIFICATION_FADE_IN = 2000;
 const NOTIFICATION_VISIBLE = 1500;
 const NOTIFICATION_FADE_OUT = 1200;
