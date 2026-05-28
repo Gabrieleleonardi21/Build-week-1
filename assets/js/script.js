@@ -62,6 +62,10 @@ render();
 // decide quale schermata mostrare e la disegna
 function render() {
   const app = document.querySelector("#app");
+  if (!app) {
+    console.error("Elemento #app non trovato nel DOM. Assicurati che index.html contenga un elemento con id=app.");
+    return;
+  }
   app.replaceChildren();
 
   if (currentScreen === "welcome") {
@@ -472,6 +476,9 @@ function advance() {
 // fa partire il conto alla rovescia
 function startTimer() {
   let timeLeft = TIMER_DURATION;
+
+  // evita di creare più timer sovrapposti
+  if (timerId) stopTimer();
 
   timerId = setInterval(() => {
     timeLeft--;
